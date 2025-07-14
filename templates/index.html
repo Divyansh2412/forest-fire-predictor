@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forest Fire Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Forest Fire Probability Predictor</h1>
+        <form action="/predict" method="post">
+            <input type="text" id="city-input" placeholder="Enter city name">
+<button onclick="getCoordinates()">Get Coordinates</button>
+<br>
+<label>Latitude:</label> <input type="text" id="lat" step="any" name="latitude" placeholder="Latitude" requiredy>
+<label>Longitude:</label> <input type="text" id="lon" step="any" name="longitude" placeholder="Longitude" required>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+    <script>
+function getCoordinates() {
+    const city = document.getElementById('city-input').value;
+    const url = `https://nominatim.openstreetmap.org/search?city=${city}&format=json`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          if (data.length > 0) {
+              const lat = data[0].lat;
+              const lon = data[0].lon;
+              document.getElementById('lat').value = lat;
+              document.getElementById('lon').value = lon;
+          } else {
+              alert("City not found.");
+          }
+      })
+      .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>

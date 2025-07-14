@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if error %}
+            <h2>{{ error }}</h2>
+        {% else %}
+            <h2>Weather Data</h2>
+            <ul>
+                <li><b>Current Temperature:</b> {{ weather.current_temp }} °C</li>
+                <li><b>Avg Temperature:</b> {{ weather.avg_temp }} °C</li>
+                <li><b>Min Temperature:</b> {{ weather.min_temp }} °C</li>
+                <li><b>Max Temperature:</b> {{ weather.max_temp }} °C</li>
+                <li><b>Humidity:</b> {{ weather.humidity }}%</li>
+                <li><b>Precipitation:</b> {{ weather.precipitation }} mm</li>
+                <li><b>Wind Speed:</b> {{ weather.windspeed }} km/h</li>
+            </ul>
+            <h2>Natural Fire Probability: <span class="highlight">{{ fire_prob }}%</span></h2>
+        {% endif %}
+        <a href="/">← Try Another Location</a>
+    </div>
+</body>
+</html>
